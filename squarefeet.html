@@ -1,0 +1,382 @@
+<!-- (C) 2020 VisualCalcs, LLC, all rights reserved-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles/mainCSSF.css">
+	<title>Section Properties Calculator Pro</title>
+</head>
+<body>
+
+    <div class="smokescreen" id="smokescreen"></div>
+    <div class="snipcursor" id="snipcursor"></div>
+    <div class="erasecursor" id="erasecursor"></div>
+
+    <!--div class="loaderholder">
+        <div id = "loader"; class="loader"></div>
+        <span class ="loadertxt" id="loadertxt">Calculating...</span>
+    </div-->
+
+    <div class="results" id="results">
+    	<div class="resultsgrab" id="resultsgrab">
+            <span class="resultsheader" id="resultsheader">Results</span>
+        	<!--button class = "cancelbtn"; id = "cancelbtn" onclick="cancelClicked()"-->
+        	</button>
+        	<!--button class = "reshelpbtn"; id = "reshelpbtn" onclick="resultsHelpClicked()"-->
+        	</button>
+        </div>
+        <textarea class = "outputpopuptext"; id = "outputpopuptext"; ReadOnly = "true"; spellcheck="false"; name="outputpopuptext"; wrap="hard" value="Name of file \n Date And Time \n Area">
+        </textarea>
+
+        <div id = "loader"; class="loader"></div>
+
+        <div class="resultskeepout" id="resultskeepout"></div>
+    	<!--button class = "okbtn"; id = "okbtn" onclick="cancelClicked()">Got it!
+    	</button-->
+    </div>
+
+    <div class="resizealert" id="resizealert">
+    	<div class="resizegrab" id="resizegrab">
+            <span class="resizeheader" id="resizeheader">Resize Image</span>
+        	<button class = "resizecancelbtn"; id = "resizecancelbtn" onclick="resizecancelClicked()">
+        	</button>
+        	<!--button class = "reshelpbtn"; id = "reshelpbtn" onclick="resultsHelpClicked()"-->
+        	</button>
+        </div>
+        <textarea class = "resizetext"; id = "resizetext"; ReadOnly = "true"; spellcheck="false"; name="resizetext"; wrap="hard">Drag left or right to resize. Click Ok when finished.
+        </textarea>
+    	<button class = "resizeokbtn"; id = "resizeokbtn" onclick="resizecancelClicked()"><b>OK</b>
+    	</button>
+
+    </div>
+
+    <div class="erroralert" id="erroralert">
+    	<div class="errorgrab" id="errorgrab">
+            <span class="errorheader" id="errorheader"></span>
+        	<button class = "errorreshelpbtn"; id = "errorreshelpbtn" onclick="errorHelpClicked()">
+        	</button>
+        </div>
+        <textarea class = "erroralerttext"; id = "erroralerttext"; ReadOnly = "true"; spellcheck="false"; name="erroralerttext"; wrap="hard">This is the error text!
+        </textarea>
+    	<button class = "errorokbtn"; id = "errorokbtn" onclick="errorcancelClicked()"><b>OK</b>
+    	</button>
+    </div>
+
+    <div class="clearalert" id="clearalert">
+    	<div class="cleargrab" id="cleargrab">
+            <span class="clearheader" id="clearheader">Clear Screen?</span>
+        	<!--button class = "clearhelpbtn"; id = "clearhelpbtn" onclick="clearHelpClicked()"-->
+        	</button>
+        </div>
+        <textarea class = "clearalerttext"; id = "clearalerttext"; ReadOnly = "true"; spellcheck="false"; name="clearalerttext"; wrap="hard">Clear the screen? This action cannot be undone.
+        </textarea>
+    	<button class = "clearokbtn"; id = "clearokbtn" onclick="clearokClicked()"><b>OK</b>
+    	</button>
+    	<button class = "clearcancelbtn"; id = "clearcancelbtn" onclick="clearcancelClicked()"><b>Cancel</b>
+    	</button>
+    </div>
+
+    <div class="firstdimalert" id="firstdimalert">
+    	<div class="firstdimgrab" id="firstdimgrab">
+            <span class="firstdimheader" id="firstdimheader">First Dimension</span>
+        	<button class = "firstdimhelpbtn"; id = "firstdimhelpbtn" onclick="firstdimHelpClicked()">
+        	</button>
+        </div>
+        <textarea class = "firstdimalerttext"; id = "firstdimalerttext"; ReadOnly = "true"; spellcheck="false"; name="firstdimalerttext"; wrap="hard">Enter first line length:
+        </textarea>
+
+	    <input class = "firstinput"; type="number" id ="firstinput"; autocomplete="off"; style="width: 40px;"/>
+
+        <select class = "unitsselection_a"; id="unitsselection_a">
+            <option value= "in">in</option>
+            <option value= "ft" selected>ft</option>
+            <option value= "mi">mi</option>
+            <option value= "m">m</option>
+            <option value= "mm">mm</option>
+            <option value= "cm">cm</option>
+            <option value= "km">km</option>
+        </select>
+
+    	<button class = "firstdimokbtn"; id = "firstdimokbtn" onclick="firstdimokClicked()"><b>OK</b>
+    	</button>
+    	<button class = "firstdimcancelbtn"; id = "firstdimcancelbtn" onclick="firstdimcancelClicked()"><b>Cancel</b>
+    	</button>
+    </div>
+
+    <div class="prealert" id="prealert">
+    	<div class="pregrab" id="pregrab">
+            <span class="preheader" id="preheader">Precision</span>
+        	<button class = "prehelpbtn"; id = "prehelpbtn" onclick="preHelpClicked()">
+        	</button>
+            <button class = "prexbtn"; id = "prexbtn" onclick="precancelClicked()">
+        	</button>
+        </div>
+        <textarea class = "prealerttext"; id = "prealerttext"; ReadOnly = "true"; spellcheck="false"; name="clearalerttext"; wrap="hard">Select display precision:
+        </textarea>
+        <select class = "precisionselection"; id="precisionselection">
+            <option value= "0">0</option>
+            <option value= "1">1</option>
+            <option value= "2" selected>2</option>
+            <option value= "3">3</option>
+        </select>
+    	<button class = "preokbtn"; id = "preokbtn" onclick="preokClicked()"><b>OK</b>
+    	</button>
+    	<button class = "precancelbtn"; id = "precancelbtn" onclick="precancelClicked()"><b>Cancel</b>
+    	</button>
+    </div>
+
+    <div class="unitsalert" id="unitsalert">
+    	<div class="unitsgrab" id="unitsgrab">
+            <span class="unitsheader" id="unitsheader">Select Units</span>
+        	<!--button class = "unitshelpbtn"; id = "unitshelpbtn" onclick="unitsHelpClicked()"-->
+        	</button>
+            <button class = "unitsxbtn"; id = "unitsxbtn" onclick="unitscancelClicked()">
+        	</button>
+        </div>
+        <textarea class = "unitsalerttext"; id = "unitsalerttext"; ReadOnly = "true"; spellcheck="false"; name="clearalerttext"; wrap="hard">Select Units:
+        </textarea>
+        <select class = "unitsselection"; id="unitsselection">
+            <option value= "in" selected>inches</option>
+            <option value= "ft">feet</option>
+            <option value= "mi">miles</option>
+            <option value= "m">meters</option>
+            <option value= "mm">milimeters</option>
+            <option value= "cm">centimeters</option>
+            <option value= "km">kilometers</option>
+        </select>
+    	<button class = "unitsokbtn"; id = "unitsokbtn" onclick="unitsokClicked()"><b>OK</b>
+    	</button>
+    	<button class = "unitscancelbtn"; id = "unitscancelbtn" onclick="unitscancelClicked()"><b>Cancel</b>
+    	</button>
+    </div>
+
+    <div class="welcome" id="welcome">
+        <div class="welcomegrab" id="welcomegrab">
+            <span class="welcomeheader" id="welcomeheader">VisualCalcs Area Calculator</span>
+        	<!--button class = "welcomecancelbtn"; id = "welcomecancelbtn" onclick="welcomecancelClicked()"-->
+        	</button>
+        </div>
+        	<div class="welcometxt" id = "welcometxt">
+        	    <br> Draw a shape, get the area. Easy.
+                <br><br>
+                <div class="fineprint">
+                    © 2020 VisualCalcs, LLC<br>
+        	        By continuing you are agreeing to our <a target="_blank" href="disclaimerredir.html">User Agreement</a> and <a target="_blank" href=privacyredir.html">Privacy Policy</a>. We use cookies to improve your experience on this site.
+        	    </div>
+            </div>
+    	<button class = "okbtn"; id = "okbtn" onclick="welcomecancelClicked()"><b>Continue</b>
+    	</button>
+    </div>
+
+
+    <div class="tod" id="tod">
+        <div class="todgrab" id="todgrab">
+            <span class="todheader" id="todheader">VisualCalcs Area Calculator</span>
+        	</button>
+        </div>
+        	<div class="todtxt" id = "todtxt">
+        	    <br>How would you like to get started?
+            </div>
+    	    	<label class="custom-file-upload_a" id="custom-file-upload_a">
+                    <input type='file'; id='imgupload'>Load an Image to Trace</input>
+                    <i class="fa fa-cloud-upload"></i>
+                </label>
+    	    <button class = "todcancel"; id = "todcancel" onclick="todcancelClicked()"><b>Draw Freehand</b></button>
+    </div>
+
+    <div class="fob" id="fob">
+        <div class="fobgrab" id="fobgrab">
+            <span class="fobheader" id="fobheader">VisualCalcs Area Calculator</span>
+        	</button>
+        </div>
+        	<div class="fobtxt" id = "fobtxt">
+        	    <br>Looks like you need more credits!
+            </div>
+    	    <button class = "fobbuy"; id = "fobbuy" onclick="buyproclicked()"><b>Sign up for pro: Unlimted Use!</b></button>
+    	    <button class = "fobfeedback"; id = "fobfeedback" onclick="fobfeedbackClicked()"><b>Give us feedback: +10 Credits</b></button>
+    </div>
+
+    <div class="feedbackbox" id="feedbackbox">
+        <div class="feedbackboxgrab" id="feedbackboxgrab">
+            <span class="feedbackboxheader" id="feedbackboxheader">VisualCalcs Area Calculator</span>
+        </div>
+        	<div class="feedbackboxtxt" id = "feedbackboxtxt">
+                <br>Thanks for helping us improve.
+                Answer the questions below and get 10 credits!<br><br>
+                <div class="questions">
+            	    <label for="email" class="emaillabel">What is your Email Address?</label>
+            	    <input type="text" id="email" class="email" name="email"></input><br><br>
+
+            	    <label for="contactcheckbox" class="contactcheckboxlabel">I'm ok with recieving the occasional Email from VisualCalcs</label>
+            	    <input type="checkbox" id="contactcheckbox" class="contactcheckbox" name="contactcheckbox" checked></input><br><br>
+
+            	    <label for="usecase">What are you finding the area of?</label>
+            	    <input type="text" id="usecase" class="usecase" name="usecase"></input><br><br>
+
+             	    <label for="improvement">Any improvements to suggest?</label>
+            	    <textarea id="improvement" class="improvement" name="improvement"></textarea><br><br>
+                </div>
+
+            </div>
+    	<button class = "feedbackboxokbtn"; id = "feedbackboxokbtn" onclick="feedbackOkClicked()"><b>Submit!</b>
+    	</button>
+    </div>
+
+    <div class="SaveRedir" id="SaveRedir">
+        <div class="SaveRedirgrab" id="SaveRedirgrab">
+            <span class="SaveRedirheader" id="SaveRedirheader"><b>Feature Locked</b></span>
+        	<button class = "SaveRedircancelbtn"; id = "SaveRedircancelbtn" onclick="SaveRedircancelClicked()">
+        	</button>
+        </div>
+        	<div class="SaveRedirwelcometxt" id = "SaveRedirwelcometxt"><b>
+        	    Upgrade to Pro to Save and Load Shapes!<br><br>
+        	</div>
+    	<button class = "SaveRedirokbtn"; id = "SaveRedirokbtn" onclick="SaveRedircancelClicked()"><b>Nope</b>
+    	<button class = "SaveRedirPricingbtn"; id = "SaveRedirPricingbtn" onclick="buyproclicked()"><b>Sure!</b>
+    	</button>
+    </div>
+
+    <div class="LinesRedir" id="LinesRedir">
+        <div class="LinesRedirgrab" id="LinesRedirgrab">
+            <span class="LinesRedirheader" id="LinesRedirheader"><b>Line Limit Exeeded</b></span>
+        	<button class = "LinesRedircancelbtn"; id = "LinesRedircancelbtn" onclick="LinesRedircancelClicked()">
+        	</button>
+        </div>
+        	<div class="LinesRedirwelcometxt" id = "LinesRedirwelcometxt"><b>
+        	    Demo mode supports shapes with up to 4 lines. Upgrade to Pro? <br><br>
+        	</div>
+    	<button class = "LinesRedirokbtn"; id = "LinesRedirokbtn" onclick="LinesRedircancelClicked()"><b>Nope</b>
+    	<button class = "LinesRedirPricingbtn"; id = "LinesRedirPricingbtn" onclick="buyproclicked()"><b>Sure!</b>
+    	</button>
+    </div>
+
+	<div class="coloralert" id="coloralert">
+    	<div class="colorgrab" id="colorgrab">
+            <span class="colorheader" id="colorheader"></span>
+        </div>
+        <textarea class = "colortext"; id = "colortext"; ReadOnly = "true"; spellcheck="false"; name="colortext"; wrap="hard">Select desired line color:
+        </textarea>
+    	<button class = "color1btn"; id = "color1btn" onclick="color1Clicked()">
+    	</button>
+    	<button class = "color2btn"; id = "color2btn" onclick="color2Clicked()">
+    	</button>
+    	<button class = "color3btn"; id = "color3btn" onclick="color3Clicked()">
+    	</button>
+    	<button class = "color4btn"; id = "color4btn" onclick="color4Clicked()">
+    	</button>
+    </div>
+
+
+	<canvas class="canvas" id="canvas"></canvas>
+
+	<canvas class="imgcanvas" id="imagecanvas"></canvas>
+
+	<div id= "menubar">
+        <!--div class="pricinglink"; id="pricinglink">Currently in demo mode
+    			<button class = "buypro"; id = "buypro" onclick="buyproclicked()">Get Pro!</button>
+        </div-->
+
+        <div class="calculate"; id="pricinglink">
+    			<button class = "calcarea"; id = "buypro" onclick="Button6Clicked()">Calculate</button>
+    			<button class = "units"; id = "units" onclick="displayUnitsAlert()">Units: ft</button>
+    			<button class = "help"; id = "help" onclick="Button9Clicked()">Help</button>
+    			<button class = "hsdims"; id = "hsdims" onclick="hsdims()">Hide Dimensions</button>
+    			<button class = "linecolor"; id = "linecolor" onclick="setColor()">Set Line Color</button>
+    			<!--button class = "resizeimg"; id = "resizeimg" onclick="setResizeMode()">Resize Image</button-->
+        </div>
+
+	    <input class = "inputbox"; type="number" id ="inputBox"; display =  none; autocomplete="off"; style="width: 65px;"/>
+        <!--textarea class = "outputboxcl"; id = "outputBox"; ReadOnly = "true"; spellcheck="false"; rows="2" cols="20" name="outputBox" wrap="hard">
+        </textarea-->
+
+
+        <a target="_blank" href="homeredir.html">
+		    <div id = "logospace" class ="logospace">
+		    </div>
+		</a>
+	</div>
+    <!--<div id = "toolsmenuouter-->
+        <div id = "toolsmenu">
+		    <div id ="toolsmenuinner">
+
+    			<!--button onclick="Button6Clicked()" class = "gobtn"</button>
+    		    <span class="gobtntooltip">Get Section Properties!</span-->
+
+    			<button class = "linesbtn"; id = "linesb" onclick="userInputLinesButtonClicked()">
+    		    <span class="linesbtntooltip">Draw Lines</span>
+
+    			<!--button class = "constlinesbtn"; id = "constlinesb" onclick="ConstLinesClicked()">
+    		    <span class="constlinesbtntooltip">Construction Lines (c)</span>
+
+    			<button class = "filletsbtn"; id = "filletsb" onclick="Button3Clicked()">
+    		    <span class="filletsbtntooltip">Fillets (f)</span>
+
+    		    <span class="filletsInput" id = "filletsInput">Radius:
+                <input class = "filletRadius" type="number" id="filletRadius" name="filletRadius">
+                </span-->
+
+    			<button class = "snipbtn"; id = "snipb" onclick="SnipClicked()">
+    		    <span class="snipbtntooltip">Erase Lines</span>
+
+    			<!--button class = "erasebtn"; id = "eraseb" onclick="EraseClicked()">
+    		    <span class="erasebtntooltip">Erase (e)</span-->
+
+    			<!--button class = "dimlinesbtn"; id = "dimlinesb" onclick="DimLinesClicked()">
+    		    <span class="dimlinesbtntooltip">Linear Dimension (d)</span-->
+
+    			<button class = "dimanglesbtn"; id = "dimanglesb" onclick="DimAnglessClicked()">
+    		    <span class="dimanglesbtntooltip">Angular Dimension</span>
+
+    		    <!--This stuff below is for the 3 new buttons -->
+
+    			<button class="undobtn"; id = "undob" onclick="undoClicked()">
+    		    <span class="undobtntooltip">Undo</span>
+
+    			<!--button class="redobtn"; id = "redob" onclick="redoClicked()">
+    		    <span class="redobtntooltip">Redo (ctrl-r)</span-->
+
+    			<button class="clearbtn"; id = "clearb" onclick="clearClicked()">
+    		    <span class="clearbtntooltip">Reset</span>
+
+    		    <!--End new buttons -->
+
+    			<!--button class="precisionbtn"; id = "precisionb" onclick="Button8Clicked()">
+    		    <span class="precisionbtntooltip">Change Dimension Precision</span>
+
+    			<button onclick="Button7Clicked()"; class = "savebtn">
+    		    <span class="savebtntooltip">Save Shape</span>
+    			</button>
+
+
+    			<button onclick="LoadClicked()"; class = "loadbtn">
+    		    <span class="loadbtntooltip">Load Shape</span>
+    			</button>
+
+    	    	<!--label class="custom-file-upload">
+                    <input type='file'; id='fileinput'/>
+                        <span class="custom-file-uploadtooltip">Load Shape</span>
+                    <i class="fa fa-cloud-upload"></i>
+                <!--/label-->
+
+                <!--a target="_blank" href="tutredir.html">
+    		    <!--span class="custom-file-uploadtooltip">Load Shape</span-->
+
+    		    <!--button onclick="Button9Clicked()" class = "helpbtn">
+    	        <span class="helpbtntooltip">Tutorial/Help</span-->
+			</div>
+
+	    </div>
+
+	    <div class="feedback"><a target="_blank" href="contactredir.html" id = "fb" class="fb">[+]Feedback</a></div>
+
+	    <div class="credits">
+	        <button class = "creditsbtn"; id = "creditsbtn" onclick="buyproclicked()">Credits Remaining: </button>
+        </div>
+
+    <!--</div>-->
+	<script src = "FontSizeF.js"></script>
+	<!--script src = "L141A41e51dAA.js"></script-->
+	<script src = "unobsquarefeet.js"></script>
+
+</body>
+</html>

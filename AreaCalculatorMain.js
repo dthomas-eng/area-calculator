@@ -1,4 +1,4 @@
-/////////////////////////////START OF GUI SECTION////////////////////
+/* (C) 2020 VisualCalcs, LLC, all rights reserved */
 var mouseState = 'moving';
 var drawingMode = 'lines';
 
@@ -277,45 +277,15 @@ var logQ = [];
 
 var remainingCredits = 20;
 
-//positionCsys();
-
 highlightButtonImg('linesb');
 
-//StartText("Click, drag, and release to draw first line.");
-
-//lock input because the welcome pop up is shown.
 InputFreze = true
-
-//Define the toptext and instantate it.
-//TopTextValue = new TopText("Drawing Mode: Lines | New Cross Section",TopTextX, TopTextY);
-//TopTextValue.drawTopText(TopTextValue.text,TopTextX,TopTextY);
 
 var downhappened = false;
 var dragginghappened = false;
 var lastMouseInOrOut = false;
 
 const compareNumbers = (a, b) => a - b;
-
-/*
-if(document.referrer == "https://visualcalcs.com/area-calculator/" || document.referrer == "http://visualcalcs.com/area-calculator/" || document.referrer == "https://visualcalcs.com" || document.referrer == "http://visualcalcs.com") {
-    //go right ahead, sir...
-}
-else{
-    //replace this link with that to the purchase page.
-    window.location.replace("https://visualcalcs.com/pricing/");
-}
-
-*/
-//writedebugToOutputbox(document.referrer);
-
-//Detect if VC is running on a windows machine. If that's the case, make the font of a few things a bit bigger.
-//if (navigator.appVersion.indexOf("Win")!=-1){
-  //  //console.log('running on windows');
-    //increaseFontSize();
-//}
-
-//Set the cookies to have samesite attributes.
-document.cookie = "_ga=GA1.2.2103841742.1587663773; SameSite = None; Secure; _gid=GA1.2.505048806.1587663773; SameSite = None; Secure;"
 
 unloadScrollBars();
 
@@ -411,15 +381,8 @@ function whatbrowser(){
 }
 
 
-//console.log('Thanks for using VisualCalcs Area Calculator!')
-//As the mainloop is triggered, note what type of change is made when drawing changes occur.
-//An array is populated with 'moves' that the user has made. This array is read from when
-//an undo is called. The appropriate action is then applied to undo the last move.
-
-//Temporary test mode: Delete when done.
 drawingMode = 'lines';
 
-//The main loop is triggered anytime user input is made.
 function mainLoop(){
 
     if(closeOrOpenSection() == true && StressGradientShown == false && doNotFindArea == false){
@@ -432,20 +395,6 @@ function mainLoop(){
 
     switchToPointer();
 
-/*
-	//Manage the stabilized/non stabilized radio buttons.
-	if(document.getElementById("Stabilized").checked == true){
-		Stability = 'stabilized';
-	}
-
-	if(document.getElementById("Nonstabilized").checked == true){
-		Stability = 'nonstabilized';
-	}
-
-*/
-
-
-	//Make sure the scale gets set from first line. Don't let anything happen until it has been set.
 	if(lineArray.length > 1 && Scale == 0){
 		displayError('noscale','Dimension first line before drawing next line. \n\nFor help, press ? button.');
 		l = lineArray[lineArray.length - 1];
@@ -453,9 +402,6 @@ function mainLoop(){
 	}
 
 	Redraw();
-    //To fix error when a drag occurs from outside of the drawing error, need to enforce an order. That is, make sure that the user has clicked in a
-    //valid area before allowing a drag opperation to take place.
-	//conditional to ensure that the mouse is in the drawing area:
 
     if (mouseInDrawingArea() == true) {
 	    lastMouseInOrOut = true;
@@ -467,19 +413,15 @@ function mainLoop(){
 					case 'moving':
 					    isonendpoint();
 						isonline(mouse.x, mouse.y, 'UI');
-						//Highlight lines and endpoints, suggest snap lines
 						dragginghappened = false;
 						if(ControlDown == false){
 						    isonendpoint();
 						    isoncentroid();
 						    isonzerozero();
 						}
-                        //isonline(mouse.x, mouse.y, 'UI');
-						//isondim(mouse.x,mouse.y,10,27);
 						isonfillet(mouse.x,mouse.y);
                         isonHandle(mouse.x, mouse.y);
 
-						//isonSRP(mouse.x,mouse.y)
 						if(drawingHV == true && ControlDown == false){
 						    suggestHVSnap();
 						}
@@ -18477,158 +18419,25 @@ function UtilityPointDraw(callback){
 	    }
 
 }
-/*
-
-function UtilityPointDraw(callback){
-
-    //Set flag that listens for window resizes:
-    ListenForResize = true;
-
-    clearResults();
-
-    //Mometarily freeze input, so the user can't do anything that will interrupt this process.
-    InputFreze = true;
-
-    var pCString = "";
-
-    var PackagedArray = packageForPy(lineArray,arcArray);
-
-    var PackagedArraytoSend = JSON.stringify(PackagedArray);
-
-	var ourRequest = new XMLHttpRequest();
-
-	ourRequest.onload = function(){
-
-	    if(inboundsCheck() == true){
-
-    	    if(CancelledRequest != true){
-        		rectString = ourRequest.responseText;
-        	    var rectsCollector = rectString.split(",");
-
-        	    //Assigning values to global property variables:
-            	actualCx = parseFloat(rectsCollector[0]);
-                actualCy = parseFloat(rectsCollector[1]);
-                MasterCx = actualCx;
-                MasterCy = canvas.height*Scale - actualCy;
-                dispCx = actualCx / Scale;
-                dispCy = canvas.height - actualCy / Scale;
-
-                CxToReport = actualCx - zeroX*Scale;
-                CyToReport = actualCy - (canvas.height - zeroY)*Scale;
-
-                MasterArea = parseFloat(rectsCollector[2]);
-                MasterIxx = parseFloat(rectsCollector[3]);
-                MasterIyy = parseFloat(rectsCollector[4]);
-
-                MasterAlpha = parseFloat(rectsCollector[5]);
-                MasterIxp = parseFloat(rectsCollector[6]);
-                MasterIyp = parseFloat(rectsCollector[7]);
-
-                ////console.log(actualCx, actualCy, MasterArea, MasterIxx, MasterIyy, MasterAlpha, MasterIxp, MasterIyp)
-
-        	    for(var i = 8; i < rectsCollector.length; i = i+4){
-        	        rectArray.push(new Rectangle(rectsCollector[i]/Scale, canvas.height -rectsCollector[i+1]/Scale, rectsCollector[i+2]/Scale, rectsCollector[i+3]/Scale, 'black', 1));
-        	    }
-
-        		FromRectsToPxs();
-
-        	    Redraw();
-
-        	    ListenForResize = false;
-
-        	    if(ourRequest.status != 200){
-        	        alert('Oops. Something is broken. Things to try: \n\n -Check your internet connection \n-Save your work and reload this page \n\n No luck? Email support@visualcalcs.com')
-        	        document.getElementById("loader").style.visibility = "hidden";
-        	        InputFreze = false;
-        	    }
-        	    else{
-        	        callback();
-        	    }
-    	    }
-    	    else{
-    	        document.getElementById("loader").style.visibility = "hidden";
-    	        alert('Analysis cancelled due to resized window!');
-    	        CancelledRequest = false;
-    	        ListenForResize = false;
-    	        InputFreze = false;
-    	    }
-	    }
-        else{
-    	    document.getElementById("loader").style.visibility = "hidden";
-            alert('Lines out of window. Resize window to include all lines and retry.')
-            InputFreze = false;
-        }
-	};
-
-
-
-
-	ourRequest.open('POST', 'https://derickthomas.pythonanywhere.com/printOut');
-	ourRequest.setRequestHeader("Content-type", "text/plain");
-	ourRequest.send(PackagedArraytoSend);
-	ourRequest.addEventListener("readystatechange", checkConnection, false);
-
-	function checkConnection(){
-        if (ourRequest.readyState == 4) {
-            if (ourRequest.status >= 200 && ourRequest.status < 304) {
-                //do nothing.
-            }
-            else {
-        	        alert('Oops. Something is broken. Things to try: \n\n -Check your internet connection \n-Save your work and reload this page \n\n No luck? Email support@visualcalcs.com')
-        	        document.getElementById("loader").style.visibility = "hidden";
-            }
-    	}
-	}
-}
-*/
-//Next up: Calc relative centroid in python script and calculate principals. Also, calc q. Validate results of the core functionality.
-
-
-/////////////////Draw Rects, grab the pixels and paint 'em////////////////////////////////////////////////////////////////////////////////////
 
 function FromRectsToPxs(){
 
-    //Momentarily clear the screen:
     c.clearRect(0,0,canvas.width, canvas.height);
     imageData = c.getImageData(0, 0, canvas.width, canvas.height);
     data = imageData.data;
 
 	rasterArray = [];
 
-    //Here, we generate a rectArray instead of getting it from the server:
     FillIn();
-
-
-
-    /*
-function Rectangle(cx, cy, b, w, color, groupid){
-
-	this.cx = cx;
-	this.cy = cy;
-	this.b = b;
-	this.w = w;
-	this.color = color;
-	this.groupid = 0;
-
-	this.drawrect = function(){
-		c.fillStyle = color;
-		c.fillRect(cx - b /2, cy - w/2, b, w);
-		c.stroke();
-	}
-}
-*/
 
 	for(var i = 0; i < rectArray.length; i++){
 	    r = rectArray[i];
 		r.drawrect();
 	}
 
-
-    //Get those pixels into array form:
     imageData = c.getImageData(0, 0, canvas.width, canvas.height);
     data = imageData.data;
 
-    //If the pixels are not transparent (don't have an alpha value == 0),
     for(var index = 0; index < data.length; index = index+4){
         if(data[index + 3] != 0){
 	       rasterArray[index / 4] = 'inside';
@@ -18652,44 +18461,27 @@ function Rectangle(cx, cy, b, w, color, groupid){
     ShowMax = true;
     showZeroZero = true;
 
-    //Unfreze User input:
     InputFreze = false;
     Redraw();
 
 
 }
 
-//Next major thing to work towards is stress gradient and max/min stresses.
-//As load point is moved, re-run and max stresses based on new location.
-//Re-include SRPs
-//Basically get this thing reporting data at a level at which a major validation campaign can be initiated. Do that next and call the backend/calcs stuff done. Then it's just presentation and GUI stuff.
-//Manage precision - way to show more digits or less based on hover/key combo.
-//Also, work out better presentation of data. That temporary box is getting pretty annoying to look at.
 
-
-//This is the serverlog queueing routine - keeps pumping out entries in order.
 function PrintToLog(datatoprint){
-
-    //Add whatever string is passed in to this function to a Queue.
     logQ.push(datatoprint);
 
-    //Call to empty the Queue.
     FlushLog();
 }
 
-//Called whevener a print to log request is made.
 function FlushLog(){
-
-   //If there is anything in the Queue, send it.
     if(logQ.length != 0){
         var dataToSend = logQ.pop()
-        //console.log(dataToSend);
     	var logRequest = new XMLHttpRequest();
     	logRequest.open('POST', 'https://visualcalcs.pythonanywhere.com/PrintToLog');
     	logRequest.setRequestHeader("Content-type", "text/plain");
     	logRequest.send('-->' + dataToSend);
 
-        //Once the request gets back, see if there is anything left in the Queue.
         logRequest.onload = function(){
             FlushLog();
         }
@@ -18697,8 +18489,6 @@ function FlushLog(){
 }
 
 
-
-//This function tells the server to send an email that  new session was initiated.
 function StartSession(){
 
 	var ourRequest = new XMLHttpRequest();
@@ -18708,25 +18498,19 @@ function StartSession(){
 	ourRequest.setRequestHeader("Content-type", "text/plain");
 	ourRequest.send(newsession);
 
-	//Once the request gets back.
+
 	ourRequest.onload = function(){
-	    ////console.log('')
 	}
 
 }
 
-//This function sends a json of the ran shape to the server to be emailed to support.
 function SendShape(){
-
-    //console.log('sending shape...')
 
 	var ourRequest = new XMLHttpRequest();
 
-    //Save the shape:
 	var exportArray = [Precision, Scale, ElementID, lineArray, arcArray, linearDimArray, AngularDimArray, relAngleArray, previewLine, undoFilletArray];
 	JsonToSend = JSON.stringify(exportArray);
 
-    //console.log(JsonToSend)
 
 	var newsession = 'newsession'
 
@@ -18734,17 +18518,12 @@ function SendShape(){
 	ourRequest.setRequestHeader("Content-type", "text/plain");
 	ourRequest.send(JsonToSend);
 
-	//Once the request gets back.
 	ourRequest.onload = function(){
-	    ////console.log('')
 	}
 
 }
 
-//This function sends a json of the ran shape to the server to be emailed to support.
 function getIP(){
-
-    //console.log('sending shape...')
 
 	var ourRequest = new XMLHttpRequest();
 
@@ -18754,7 +18533,6 @@ function getIP(){
 	ourRequest.setRequestHeader("Content-type", "text/plain");
 	ourRequest.send(newsession);
 
-	//Once the request gets back.
 	ourRequest.onload = function(){
 	    remainingCredits = ourRequest.responseText
         var btn = document.getElementById("creditsbtn");
@@ -18763,10 +18541,7 @@ function getIP(){
 
 }
 
-//Increments the credits used value for this IP address.
 function UseCredit(){
-
-    //console.log('sending shape...')
 
 	var ourRequest = new XMLHttpRequest();
 
@@ -18776,7 +18551,6 @@ function UseCredit(){
 	ourRequest.setRequestHeader("Content-type", "text/plain");
 	ourRequest.send(newsession);
 
-	//Once the request gets back.
 	ourRequest.onload = function(){
 	    remainingCredits = ourRequest.responseText
 	    console.log('Credits used: ' , remainingCredits);

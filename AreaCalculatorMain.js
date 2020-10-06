@@ -1,13 +1,13 @@
-/* (C) 2020 VisualCalcs, LLC, all rights reserved 
-*
-* This is the source code for the Area Calculator. 
-*
-* Use this App at VisualCalcs.com/area-calculator.
-*
-* To see something using similar techniques, but in an easier to understand (commented) format,
-* see https://github.com/dthomas-eng/Node_Knot
-*
-**/
+/* (C) 2020 VisualCalcs, LLC, all rights reserved
+ *
+ * This is the source code for the Area Calculator.
+ *
+ * Use this App at VisualCalcs.com/area-calculator.
+ *
+ * To see a project using similar techniques, but in a condensed format with comment explainations
+ * see https://github.com/dthomas-eng/Node_Knot
+ *
+ **/
 
 var mouseState = "moving";
 var drawingMode = "lines";
@@ -7734,10 +7734,7 @@ function feedbackOkClicked() {
     var exportArray = [emailString, checkbox, usecaseString, improvementString];
     JsonToSend = JSON.stringify(exportArray);
 
-    ourRequest.open(
-      "POST",
-      "https://visualcalcs.pythonanywhere.com/SendFeedback"
-    );
+    ourRequest.open("POST", "<API URL HERE>");
     ourRequest.setRequestHeader("Content-type", "text/plain");
     ourRequest.send(JsonToSend);
 
@@ -9472,7 +9469,7 @@ function UtilityPointDraw(callback) {
     document.getElementById("resultsheader").style.visibility = "visible";
     document.getElementById("resultskeepout").style.visibility = "visible";
 
-    ourRequest.open("POST", "https://visualcalcs.pythonanywhere.com/getArea_2");
+    ourRequest.open("POST", "<API URL HERE>");
     ourRequest.setRequestHeader("Content-type", "text/plain");
     ourRequest.send(PackagedArraytoSend);
 
@@ -9660,10 +9657,7 @@ function FlushLog() {
   if (logQ.length != 0) {
     var dataToSend = logQ.pop();
     var logRequest = new XMLHttpRequest();
-    logRequest.open(
-      "POST",
-      "https://visualcalcs.pythonanywhere.com/PrintToLog"
-    );
+    logRequest.open("POST", "<API URL HERE>");
     logRequest.setRequestHeader("Content-type", "text/plain");
     logRequest.send("-->" + dataToSend);
 
@@ -9677,10 +9671,7 @@ function StartSession() {
   var ourRequest = new XMLHttpRequest();
   var newsession = "newsession";
 
-  ourRequest.open(
-    "POST",
-    "https://visualcalcs.pythonanywhere.com/StartSession"
-  );
+  ourRequest.open("POST", "<API URL HERE>");
   ourRequest.setRequestHeader("Content-type", "text/plain");
   ourRequest.send(newsession);
 
@@ -9706,7 +9697,7 @@ function SendShape() {
 
   var newsession = "newsession";
 
-  ourRequest.open("POST", "https://visualcalcs.pythonanywhere.com/SendShape");
+  ourRequest.open("POST", "<API URL HERE>");
   ourRequest.setRequestHeader("Content-type", "text/plain");
   ourRequest.send(JsonToSend);
 
@@ -9718,7 +9709,7 @@ function getIP() {
 
   var newsession = "newsession";
 
-  ourRequest.open("POST", "https://visualcalcs.pythonanywhere.com/getIP");
+  ourRequest.open("POST", "<API URL HERE>");
   ourRequest.setRequestHeader("Content-type", "text/plain");
   ourRequest.send(newsession);
 
@@ -9734,7 +9725,7 @@ function UseCredit() {
 
   var newsession = "newsession";
 
-  ourRequest.open("POST", "https://visualcalcs.pythonanywhere.com/UseCredit");
+  ourRequest.open("POST", "<API URL HERE>");
   ourRequest.setRequestHeader("Content-type", "text/plain");
   ourRequest.send(newsession);
 
@@ -9745,5 +9736,3 @@ function UseCredit() {
     btn.innerHTML = "Credits Remaining: " + remainingCredits;
   };
 }
-
-/*End EverythingElse File */

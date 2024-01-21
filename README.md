@@ -1,9 +1,9 @@
 The source code for my VisualCalcs product, the Area Calculator.
 
-Try this app at https://visualcalcs.com/area-calculator/
+Try this app at https://visualcalcs.pythonanywhere.com/tool/squarefeetpro.html
 
-Learn more at https://dthomas.io/AreaCalculatorProject
+Learn more at https://dthomas.co/AreaCalculatorProject.html
 
 See https://github.com/dthomas-eng/Node_Knot for a simplified technical demo of the core functionality of Area Calculator. 
 
-© 2020 VisualCalcs, LLC. All rights reserved.
+© 2024 VisualCalcs, LLC. All rights reserved.
